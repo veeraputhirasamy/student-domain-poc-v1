@@ -7,6 +7,7 @@ const aws_sdk_1 = __importDefault(require("aws-sdk"));
 const db = new aws_sdk_1.default.DynamoDB.DocumentClient();
 const TABLENAME = process.env.TABLE_NAME || 'StudentTestTable';
 exports.createNewTest = async function (event) {
+    console.log(event,'########')
     try {
         const data = typeof event.body === 'object' ? event.body : JSON.parse(event.body);
         data.PK = `STUDENT#${Math.floor(32 * Math.random() * 4)}`;

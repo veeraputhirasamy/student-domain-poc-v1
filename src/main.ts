@@ -16,6 +16,14 @@ export class StudentDomainStack extends Stack {
       sortKey: { name: 'SK', type: dynamodb.AttributeType.STRING },
     });
 
+    //GSI SCHOOLID AND CLASSYEAR
+    StudentTestTable.addGlobalSecondaryIndex({
+      indexName: 'GSI1',
+      partitionKey: { name: 'GSI1_PK', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'GSI1_SK', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.ALL,
+    });
+
     const createStudentTest=new lambda.Function(this, `createTest-${configEnv}`, {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('src/lambda'),
